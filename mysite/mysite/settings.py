@@ -30,6 +30,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+#STATIC_URL = '/static/'
+#MEDIA_ROOT = os.path.join(BASE_DIR,"upload")
+#MEDIA_URL = '/upload/'
+
+STATICFILE_DIR = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

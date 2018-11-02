@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic import ListView
 from .models import Post
+import random
 # Create your views here.
 
 class HomePageView(ListView):
