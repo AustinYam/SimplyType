@@ -1,13 +1,11 @@
 <!--templates/base.html-->
 {% load static %}
 <head>
-
 		<title>SimplyType</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="BHost template project">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-   		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
@@ -22,16 +20,16 @@
 		 -->
 </head>
 <body>
-	<header class="site-header">
-			<div class="header_content d-flex flex-row align-items-center justify-content-start fixed-top">
-				<div class="logo"><a href="{% url 'hello/home' %}"><span>Simply</span>Type</a></div>
+	<header class=" header trans_400">
+			<div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
+				<div class="logo"><a href="{% url 'home' %}"><span>Simply</span>Type</a></div>
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-10 offset-lg-2">
 							<nav class="main_nav">
 								<ul class="d-flex flex-row align-items-center justify-content-start">
-									<li class="active"><a href="{% url 'hello/home' %}">Home</a></li>
-									<li><a href="{% url 'hello/about' %}">About us</a></li>
+									<li class="active"><a href="{% url 'home' %}">Home</a></li>
+									<li><a href="{% url 'about' %}">About us</a></li>
 									<li><a href="services.html">Services</a></li>
 									<li><a href="contact.html">Contact</a></li>
 								</ul>
@@ -52,25 +50,5 @@
 					<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 				</div>	
 			</div>
-		</header>
-		<main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {% block content %}{% endblock %}
-        </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </p>
-          </div>
-        </div>
-      </div>
-    </main>
-	</body>
+	</header>
+</body>
