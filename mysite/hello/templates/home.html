@@ -5,287 +5,190 @@
 {% load static %}
 <html lang="en">
 	<head>
+		<style>
+  #timer, #restart {
+  margin: 0.2em;
+  line-height: 2.2em;
+  height: 2.2em; }
+
+#word-section {
+  border: 1px solid #999;
+  background-color: #fff; }
+
+.center {
+    padding: 180px 0;
+    text-align: center;
+}
+
+/************************************************/
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  font-family: sans-serif;
+  min-width: 600px;
+  max-width: 850px; }
+
+header {
+  padding: 1em;
+  text-align: center; }
+  header h3 {
+    font-weight: normal; }
+
+section {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0.5em; }
+
+#word-section {
+  font-size: 1.5em;
+  color: #000000;
+  height: 7em;
+  line-height: 2em;
+  /* hide 3rd line of text */
+  border-radius: 0.25em;
+  position: relative;
+  overflow: hidden; }
+  #word-section > span {
+    display: inline-block;
+    margin-left: 0.2em;
+    /* emulate spaces between words */ }
+
+#type-section {
+  text-align: center; }
+  #type-section > * {
+    font-size: 1.5em;
+    display: inline-block;
+    border-radius: 0.25em;
+    border: none;
+    color: #fff;
+    vertical-align: middle; }
+
+#typebox {
+  width: 64%;
+  color: #000;
+  padding: 0.5em;
+  box-shadow: -1px -1px 5px #383838; }
+  #typebox:focus {
+    outline: none; }
+
+#timer {
+  width: 4em;
+  background-color: #467f21;
+  margin-right: 0; }
+
+#restart {
+  width: 2em;
+  background-color: #68a143; }
+  #restart > span {
+    display: inline-block;
+    transform: rotate(1.5Rad);
+    font-weight: bold; }
+  #restart:hover {
+    background-color: #467f21; }
+  #restart:active {
+    box-shadow: 1px 1px 4px #467f21 inset; }
+
+#results {
+  text-align: center;
+  margin: 0 1%;
+  display: block; }
+  #results li {
+    list-style: none; }
+  #results li:first-child {
+    font-size: 1.5em; }
+  #results li:nth-child(2) {
+    font-size: 0.8em;
+    line-height: 1em; }
+  #results #results-stats {
+    font-size: 0.9em; }
+
+footer {
+  margin-top: 1em;
+  text-align: center;
+  font-size: 0.8em;
+  color: #000; }
+
+footer a {
+  color: #000;
+  text-decoration: none; }
+  footer a:hover {
+    text-decoration: underline; }
+
+/************************************************/
+/* hides small bit of residule text after scrolling */
+.magic-box {
+  position: fixed;
+  width: inherit;
+  height: 0.5em;
+  top: 54px;
+  background-color: #fff; }
+
+.waiting {
+  text-align: center;
+  line-height: 1.5em;
+  font-size: 3em; }
+
+.current-word {
+  color: #000000;
+  background-color: #dddddd; }
+
+.correct-word-c {
+  color: #93c572; }
+
+.incorrect-word-c {
+  color: #e50000; }
+
+.incorrect-word-bg {
+  background-color: #e50000; }
+
+		</style>
 		<title>SimplyType</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="BHost template project">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/main_styles.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+		<script src="{% static 'wpm_test.js' %}" defer></script> 
+
 	<!--	
 		
 		<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
 		<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 		 -->
 	</head>
-<body>
-
-<div class="super_container">
 
 	<!-- Home -->
+	<body onload="addWords()">
+	<header>
+      <h3>SimpleType</h3>
+    </header>
+    <div class="center">
+    <section id="word-section">
+      <div class="waiting"">☝</div>
+    </section>
+    <section id="type-section">
+      <input id="typebox" name="typebox" type="text" tabindex="1" autofocus onkeyup="typingTest(event)"/>
+      <div id="timer" class="type-btn"><span>1:00</span></div>
+      <button id="restart" class="type-btn" tabindex="2" onclick="restartTest()">
+        <span id="restart-symbol">↻</span>
+      </button>
+    </section>
 
-	<div class="home">
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'images/index.jpg' %}" data-speed="0.8"></div>
-		<div class="home_container">
-			<div class="container">
-				<div class="row">
-					<div class="">
-								<div>
-									  {% for post in all_posts_list %}
-									    {{ post.text }}
-									  {% endfor %}
+<footer>
+      <script>document.write(new Date().getDay() + " /")</script>
+      <script>document.write(new Date().getMonth() + " /")</script>
+      <script>document.write(new Date().getFullYear()) + "\n"</script>
+      <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="I just got x WPM, see if you can beat me!" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a id="link1" href="http://twitter.com/share" class="twitter-share-button" data-text="I played Flying hawks and i scored : " data-count="vertical" data-via="games_html5">Tweet</a>;
 
-								</div>
-							</div>
-					<div class="col">
-						<div class="home_content text-center">
-							<div class="domain_search">
-								<div class="domain_search_background"></div>
-								<form action="#" class="domain_search_form" id="domain_search_form">
-									<input id="input" type="text" class="domain_search_input" placeholder="Start Typing..." required="required">
-								</form>
-							</div>
-							<div class="domain_pricing_content">
-								<ul class="d-flex flex-md-row flex-column align-items-center justify-content-md-between justify-content-center">
-									<li><a href="#">Beginner</a></li>
-									<li><a href="#">Easy</a></li>
-									<li><a href="#">Normal</a></li>
-									<li><a href="#">Hard</a></li>
-									<li><a href="#">Expert</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Why Choose Us -->
-	<div class="pricing">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title_container text-center">
-						<div class="section_title"><h2>Other</h2></div>
-							<div class="row">
-								<!-- Why Item -->
-								<div class="col-lg-4">
-									<div class="icon_box_1 text-center">
-										<div class="icon_box_1_title">Progress Tracking</div>
-										<div class="icon_box_1_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat.</p>
-										</div>
-									</div>
-								</div>
-
-								<!-- Why Item -->
-								<div class="col-lg-4">
-									<div class="icon_box_1 text-center">
-										<div class="icon_box_1_title">Adaptive Tests</div>
-										<div class="icon_box_1_text">
-											<p>Ipsum dolor sit amet, consectetur adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat. Aliquam erat.</p>
-										</div>
-									</div>
-								</div>
-
-								<!-- Why Item -->
-								<div class="col-lg-4">
-									<div class="icon_box_1 text-center">
-										<div class="icon_box_1_title">Quick Improvements</div>
-										<div class="icon_box_1_text">
-											<p>Lorem ipsum dolor sit amet, adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat. Aliquam erat.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-10 offset-lg-1">
-					<div class="pricing_text text-center">
-						<p>Ipsum dolor sit amet, consectetur adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat. Aliquam erat.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Content Right -->
-
-	<div class="c_right">
-		<div class="container">
-			<div class="row row-lg-eq-height">
-				
-				<!-- Content Right Image -->
-				<div class="col-lg-6 c_right_col order-lg-1 order-2">
-					<div class="c_right_image d-flex flex-column align-items-center justify-content-center">
-						<img src="{% static 'images/pic_1.png' %}" alt="Image placeholder">
-					</div>
-				</div>
-
-				<!-- Content Right Content -->
-				<div class="col-lg-6 order-lg-2 order-1">
-					<div class="c_right_content">
-						<div class="section_title_container">
-							<div class="section_title"><h2>Choose the best service</h2></div>
-						</div>
-						<div class="c_right_text">
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat. Aliquam erat volutpat. Sed efficitur diam ut interdum ultricies. In a leo vel dolor tempor feugiat. Cras accumsan faucibus magna a imperdiet. Donec mi neque, pretium eu quam at, facilisis venenatis tortor. Suspendisse potenti.</p>
-						</div>
-						<div class="content_list_1 c_right_list">
-							<ul>
-								<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-								<li>Maecenas ornare, arcu at lobortis ultrices, neque erat euismod erat</li>
-								<li>Nam pulvinar dapibus justo, ac pharetra neque dictum non</li>
-							</ul>
-						</div>
-						<div class="button c_right_button"><a href="#">order plan</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Content Left -->
-
-	<div class="c_left">
-		<div class="container">
-			<div class="row row-lg-eq-height">
-				
-				<!-- Content Left Content -->
-				<div class="col-lg-6">
-					<div class="c_left_content">
-						<div class="section_title_container">
-							<div class="section_title"><h2>Dedicated Team</h2></div>
-						</div>
-						<div class="content_list_2 c_left_list">
-							<ul>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>01.</div></div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat. Aliquam erat volutpat. Sed efficitur diam ut interdum ultricies.</p>
-								</li>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>02.</div></div>
-									<p>Dolor sit amet, consectetur adipiscing elit. Mauris velit arcu, scelerisque dignissim massa quis, mattis facilisis erat. Aliquam erat volutpat. Sed efficitur diam ut interdum ultricies.</p>
-								</li>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>03.</div></div>
-									<p>In a leo vel dolor tempor feugiat. Cras accumsan faucibus magna a imperdiet. Donec mi neque, pretium eu quam at, facilisis venenatis tortor. Suspendisse accumsan potenti.</p>
-								</li>
-							</ul>
-						</div>
-						<div class="button c_left_button"><a href="#">order plan</a></div>
-					</div>
-				</div>
-
-				<!-- Content Left Image -->
-				<div class="col-lg-6 c_left_col">
-					<div class="c_left_image d-flex flex-column align-items-center justify-content-center">
-						<img src="{% static 'images/pic_2.png' %}" alt="Image placeholder">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Footer -->
-
-	<footer class="footer">
-		<div class="footer_content">
-			<div class="container">
-				<div class="row footer_row">
-
-					<!-- Footer Column -->
-					<div class="col-xl-3 col-md-6">
-						<div class="footer_title">Our Services</div>
-						<div class="footer_list">
-							<ul>
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">Logo Design</a></li>
-								<li><a href="#">Domains Register</a></li>
-								<li><a href="#">Search Advertising</a></li>
-								<li><a href="#">Email Marketing</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<!-- Footer Column -->
-					<div class="col-xl-3 col-md-6">
-						<div class="footer_title">Useful Links</div>
-						<div class="footer_list">
-							<ul>
-								<li><a href="#">About Us</a></li>
-								<li><a href="#">Services</a></li>
-								<li><a href="#">Contact</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<!-- Footer Column -->
-					<div class="col-xl-3 col-md-6">
-						<div class="logo footer_logo"><a href="#"><span>Simply</span>Type</a></div>
-						<div class="footer_info">
-							<ul>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>Address</div></div>
-									<div>1 Washington Sq, San Jose, CA 95192</div>
-								</li>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>Phone</div></div>
-									<div>+53 345 7953 32453</div>
-								</li>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>E-mail</div></div>
-									<div>yourmail@gmail.com</div>
-								</li>
-							</ul>
-						</div>
-						<div class="cards">
-							<ul class="d-flex flex-row align-items-start justify-content-start flex-wrap">
-								<li><a href="#"><img src="images/card_1.png" alt=""></a></li>
-								<li><a href="#"><img src="images/card_2.png" alt=""></a></li>
-								<li><a href="#"><img src="images/card_3.png" alt=""></a></li>
-								<li><a href="#"><img src="images/card_4.png" alt=""></a></li>
-								<li><a href="#"><img src="images/card_5.png" alt=""></a></li>
-							</ul>
-						</div>
-						<div class="social footer_social">
-							<ul class="d-flex flex-row align-items-center justify-content-start">
-								<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+  <script type="text/javascript">
+    var maxscore = 1000;
+    var elem = document.getElementById("link1");
+    elem.setAttribute("data-text", elem.getAttribute("data-text") + maxscore);
+  </script>
+    </footer>
 </div>
-
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap-4.1.2/popper.js"></script>
-<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/progressbar/progressbar.min.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="js/custom.js"></script>
 </body>
 </html>
 {% endblock content %}

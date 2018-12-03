@@ -13,6 +13,7 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+		
 	<!--	
 		
 		<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -58,17 +59,5 @@
 			</div>
 	</header>
 </body>
-<main role = "main" class="container mt-5">
-	<div class="row">
-		<div class="col-md-8">
-			{% if messages %}
-				{% for message in messages %}
-					<div class="alert alert-{{ messages.tags }}">
-						{{ messages }}
-					</div>
-				{% endfor %}
-			{% endif %}
-		</div>
-	</div>
-</main>
+
 {% block content %}{% endblock content %}
