@@ -45,7 +45,7 @@ let colorCorrectWord = "#35a2af";
 let colorIncorrectWord = "#e50000";
 
 // Word Count and other data.
-let wordData = {
+var wordData = {
 	seconds: 60,
 	correct: 0,
 	incorrect: 0,
@@ -135,10 +135,10 @@ function isTimer(seconds)
 
 function calculateWPM(data)
 {
-	let {seconds, correct, incorrect, total, typed} = data;
-	let min = (seconds / 60);
-	let wpm = Math.ceil((typed / 5) - (incorrect) / min);
-	let accuracy = Math.ceil((correct / total) * 100);
+	var {seconds, correct, incorrect, total, typed} = data;
+	var min = (seconds / 60);
+	var wpm = Math.ceil((typed / 5) - (incorrect) / min);
+	var accuracy = Math.ceil((correct / total) * 100);
 
 	if (!isNumeric(accuracy))
 	{
@@ -150,7 +150,7 @@ function calculateWPM(data)
 			wpm = 0;
 		}
 
-	let results = `<ul id="results">
+	var results = `<ul id="results">
 		<li>WPM: <span class="wpm-value">${wpm}</span></li>
 		<li>Accuracy: <span class="wpm-value">${accuracy}%</span></li>
 		<li id="results-stats">
@@ -164,7 +164,7 @@ function calculateWPM(data)
 	$("#word-section")[0].innerHTML = results;
 
 	
-	let wpmClass = $("li:nth-child(2) .wpm-value")[0].classList;
+	var wpmClass = $("li:nth-child(2) .wpm-value")[0].classList;
 	if (accuracy > 80) {wpmClass.add("correct-word-c");}
 	else { wpmClass.add("incorrect-word-c");}
 

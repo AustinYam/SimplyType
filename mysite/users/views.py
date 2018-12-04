@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
+from .models import Profile
 
 def register(request):
 	if request.method == 'POST':
@@ -18,7 +19,10 @@ def register(request):
 
 @login_required
 def profile(request):
-	return render(request, 'users/profile.html')
+
+	data = Profile.objects.all()
+
+	return render(request, 'users/profile.html',{'data': data})
 
 def avatar(request):
 	return render(request, 'users/change.html')

@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+<head>
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+</head>
 <div class="super_container">		
 	<div class = mt-5>_</div>
 	<div class = mt-5>_</div>
@@ -15,18 +20,28 @@
 							{{ form|crispy }}
 						</fieldset>
 						<div class= "form-group">
-							<button class="btn btn-outline-info" type="submit">Login</button>
+							<button class="btn btn-outline-primary" type="submit">Login</button>
 						</div>
 					</form>
 					<div class="border-top pt-3">
 							<small class="text-muted">
 								Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up</a>
 							</small>
-							<br>
+							<div class="mt-3"></div>
 							  <p><strong>-- OR --</strong></p>
-							  <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+						<div class="row">
+							  <a class="" href="{% url 'social:begin' 'google-oauth2' %}">
+						         <img width="20px" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
+						         Login with Google
+						     </a><br>
+						 </div>
+						 <div class="mt-3"></div>
 							  <p><strong>-- OR --</strong></p>
-							  <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+						<div class="mt-3"></div>
+						 <div class="row">
+							  <a href="{% url 'social:begin' 'github' %}"> <img width="20px" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"/>
+						         Login with GitHub</a><br>
+						 </div>
 					</div>
 				</div>
 			</div>

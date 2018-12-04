@@ -5,12 +5,14 @@
 	<div class = mt-5>_</div>
 	<div class = mt-2>_</div>
 	<div class = "ml-4">
-			<div class="container">
+		<div class="container-fluid">
+			<div class="container col-5">
 				<h2>You have been logged out</h2>
 				<small class="text-muted">
-					<a class="ml-4" href="{% url 'login' %}">Log In Again</a>
+					<a class="text-center" href="{% url 'login' %}"><button class="btn btn-outline-primary">Log In Again</button></a>
 				</small>
 			</div>
+		</div>
 	</div>	
 </div>
 {% endblock content %}
