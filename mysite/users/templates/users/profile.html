@@ -2,23 +2,57 @@
 {% load crispy_forms_tags %}
 {% load avatar_tags %}
 {% block content %}
-<div class="super_container">		
+<head>
+	<style type="text/css">
+		.card {display:inline-block;}
+	</style>
+</head>
+<div class="container-fluid">
 	<div class = mt-5>_</div>
-	<div class = mt-5>_</div>
-	<div>
-		<div class="content-section">
-			<div class="media"></div>
-			<div class="container-fluid">		
-				<div class="media-body">
-					<div class="row ml-2">
-						{% avatar user 150%}
+	<div class="row">	
+		<div class="col col-md-6">	
+			<div class="card" style="width: 60%;height: 80%">
+				<div class="content-section">
+					<div class="media"></div>
+					<div class="card-body">		
+						<div class="media-body ml-5">
+						<div class="container-fluid ml-5">
+							<div class="row">
+								{% avatar user 200%}
+							</div>
+							<a class="text-white" href="{% url 'avatar_change' %}"><button class="btn btn-outline-primary  mt-3" style="">Change your avatar</button></a>
+							<p class="font-weight-bold card-title mt-4 ml-5">{{ user.username }}</p>
+							<p class="font-weight-bold ml-2">{{ user.email }}</p>
+						</div>
+						</div>
 					</div>
+				</div>
+			</div>	
+		</div>
+			<div class="col col-md-6">	
+			<div class="card" style="width: 80%;height: 80%">
+				<div class="content-section">
+					<div class="media"></div>
+					<div class="card-body">		
+						<div class="media-body ml-5">
+						<div class="container-fluid ml-5">
+							<div class="row">
+									<p>{{ request.user.wpm }}</p>
+							</div>
+							
+							
+						</div>
+						</div>
+					</div>
+<<<<<<< HEAD
 					<button class="mt-3 ml-3" style=""><a href="{% url 'avatar_change' %}">Change your avatar</a></button>
 					<h3 class="account-heading mt-4 ml-3">{{ user.username }}</h3>
 					<h3 class="account-heading mt-4 ml-3">{{ user.first_name }}</h3>
 					<h3 class="account-heading mt-4 ml-3">{{ user.email }}</h3>
+=======
+>>>>>>> 4223cec85c59bc3e093760342121736bc4baa715
 				</div>
-			</div>
+			</div>	
 		</div>
 	</div>	
 </div>

@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from hello.views import HomePageView
 from users import views as user_views
+from django.contrib.auth.decorators import login_required, permission_required
 
 urlpatterns = [
     path('admin/', admin.site.urls),
