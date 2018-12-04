@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hello.apps.HelloConfig', #new
     'users.apps.UsersConfig',
+    'avatar',
     'crispy_forms',
      'livereload',
 ]
@@ -139,3 +140,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL= 'login'
+AVATAR_CACHE_ENABLED = False

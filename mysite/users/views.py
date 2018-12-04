@@ -20,4 +20,6 @@ def register(request):
 def profile(request):
 	return render(request, 'users/profile.html')
 
+def avatar(request):
+	return render(request, 'users/change.html')
 
