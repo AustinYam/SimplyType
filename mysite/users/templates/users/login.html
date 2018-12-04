@@ -22,6 +22,11 @@
 							<small class="text-muted">
 								Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up</a>
 							</small>
+							<br>
+							  <p><strong>-- OR --</strong></p>
+							  <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+							  <p><strong>-- OR --</strong></p>
+							  <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
 					</div>
 				</div>
 			</div>
