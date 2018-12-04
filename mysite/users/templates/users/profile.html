@@ -4,9 +4,19 @@
 <div class="super_container">		
 	<div class = mt-5>_</div>
 	<div class = mt-5>_</div>
-	<div class = "ml-4">
-		<div class="container-fluid">
-			<h1>{{ user.username }}</h1>
+	<div class = "ml-5">
+		<div class="content-section">
+			<div class="media"></div>
+			<div class="container-fluid col-5">
+				<div class="container">	
+					<div class="media-body">
+						<div class="container-small">
+							<img class = "rounded-circle center" style="height: 30%; width: 50%" src="{{ user.profile.image.url }}">
+						</div>
+						<h2 class="account-heading text-center">{{ user.username }}</h2>
+					</div>
+				</div>'
+			</div>
 		</div>
 	</div>	
 </div>
