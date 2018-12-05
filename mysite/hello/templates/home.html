@@ -331,6 +331,9 @@ function calculateWPM(data)
 		</ul>`;
 
 	$("#word-section")[0].innerHTML = results;
+	//$("#mytext")[0].innerHTML = "a";
+	//document.getElementById("mytext").submit();
+
 	
 	var wpmClass = $("li:nth-child(2) .wpm-value")[0].classList;
 	if (accuracy > 80) {wpmClass.add("correct-word-c");}
