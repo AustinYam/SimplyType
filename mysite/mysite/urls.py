@@ -29,8 +29,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name = 'logout'),
     path('profile/', user_views.profile, name = 'profile'),
     path('auth/', include('social_django.urls', namespace='social')),
-    path('', include('hello.urls')),
+    path('', include('hello.urls'), name = 'home'),
     path('avatar/', include('avatar.urls')),
+    path('report_builder/', include('report_builder.urls'))
 ]
 
 if settings.DEBUG:

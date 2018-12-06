@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'livereload',
     'social_django',
+    'report_builder',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',  # <- Here
                 'social_django.context_processors.login_redirect', # <- Here
+                'django.template.context_processors.static',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -161,3 +164,13 @@ SOCIAL_AUTH_GITHUB_KEY = '66f785b04e0ab2b40deb' #Paste Client ID
 SOCIAL_AUTH_GITHUB_SECRET = '8f0d34f05239f1cfe05a5b8b0390326e2fe57e2a' #Paste Secret Key
 
 SESSION_COOKIE_AGE = 3600 # on hour in seconds
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
+
+REPORT_BUILDER_INCLUDE = ['hello.post','auth.user.profile'] # Allow only the model user to be accessed
+REPORT_BUILDER_EMAIL_NOTIFICATION = True
+REPORT_BUILDER_EMAIL_SUBJECT = ""
