@@ -171,6 +171,15 @@ REST_FRAMEWORK = {
     )
 }
 
-REPORT_BUILDER_INCLUDE = ['hello.post','auth.user.profile'] # Allow only the model user to be accessed
+REPORT_BUILDER_INCLUDE = ['hello.post','users.profile'] # Allow only the model user to be accessed
 REPORT_BUILDER_EMAIL_NOTIFICATION = True
 REPORT_BUILDER_EMAIL_SUBJECT = ""
+
+
+
+
+
+
+
+
+
