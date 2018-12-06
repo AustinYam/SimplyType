@@ -337,10 +337,9 @@ function calculateWPM(data)
 		Characters Typed: <span>${typed}</span>
 		</li>
 		</ul>`;
-
 	$("#word-section")[0].innerHTML = results;
 	//$("#mytext")[0].innerHTML = "a";
-	//document.getElementById("mytext").submit();
+	document.getElementById("myInput").value(wpm);
 
 	
 	var wpmClass = $("li:nth-child(2) .wpm-value")[0].classList;
@@ -411,11 +410,16 @@ document.onreadystatechange = function () {
       <h3>SimpleType</h3>
     </header>
     <div class="center">
-    <section id="word-section">
-    <div id="load">
-      <div id="contents" class="waiting"">☝</div>
-     </div>
-    </section>
+	    <form method="POST">
+	    	{% csrf_token %}
+		    <section id="word-section">
+		    	<input type="hidden" id="myInput" name="myInput" value="placehoder"/>
+		    	
+		    <div id="load">
+		      <div id="contents" class="waiting"">☝</div>
+		     </div>
+		    </section>
+		 </form>
     <section id="type-section">
       <input id="typebox" name="typebox" type="text" tabindex="1" autofocus onkeyup="typingTest(event)"/>
       <div id="timer" class="type-btn"><span>1:00</span></div>

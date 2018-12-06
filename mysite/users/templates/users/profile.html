@@ -21,7 +21,7 @@
 								{% avatar user 200%}
 							</div>
 							<a class="text-white ml-5" href="{% url 'avatar_change' %}"><button class="btn btn-outline-primary  mt-3" style="">Change your avatar</button></a>
-							
+							<h3 class="account-heading mt-4 ml-3">{{ user.first_name }} {{ user.last_name }}</h3>
 							<h4 class="account-heading mt-4 ml-3">{{ user.username }}</h4>
 							<h4 class="account-heading mt-4 ml-3">{{ user.email }}</h4>
 							

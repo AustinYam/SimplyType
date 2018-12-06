@@ -46,11 +46,11 @@
 							<ul class="d-flex flex-row align-items-center justify-content-start">
 								{% if request.user.is_authenticated %}
 									{% if user.is_superuser %}
-										<li><a style="font-family: 'Montserrat'" href="{% url 'profile' %}">Hello Admin, {{ user.username }}</a></li>
+										<li><a style="font-family: 'Montserrat'" href="{% url 'profile' %}">Hello Admin, {{ user.first_name }}</a></li>
 										<li><a style="font-family: 'Montserrat'" href="{% url 'admin:index' %}">Admin Site</a></li>
 										<li><a style="font-family: 'Montserrat'" href="{% url 'logout' %}">Logout</a></li>
 									{% else %}
-										<li><a style="font-family: 'Montserrat'" href="{% url 'profile' %}">Hello, {{ user.username }}</a></li>
+										<li><a style="font-family: 'Montserrat'" href="{% url 'profile' %}">Hello, {{ user.first_name }}</a></li>
 										<li><a style="font-family: 'Montserrat'" href="{% url 'logout' %}">Logout</a></li>
 									{% endif %}
 								{% else %}
