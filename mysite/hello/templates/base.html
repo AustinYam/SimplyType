@@ -26,16 +26,14 @@
 		<div class="mt-5"></div>
 		<header class=" header trans_400">
 				<div class="header_content d-flex flex-row align-items-center justify-content-start trans_400">
-					<div class="logo"><a href="{% url 'home' %}"><span>Simply</span>Type</a></div>
+					<div class="logo"><a style="font-family: 'Montserrat'"  href="{% url 'home' %}"><span style="font-family: 'Montserrat' ">Simply</span>Type</a></div>
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-10 offset-lg-2">
 								<nav class="main_nav">
 									<ul class="d-flex flex-row align-items-center justify-content-start">
-										<li><a href="{% url 'home' %}">Home</a></li>
-										<li><a href="{% url 'about' %}">About us</a></li>
-										<li><a href="services.html">Services</a></li>
-										<li><a href="contact.html">Contact</a></li>
+										<li><a  style="font-family: 'Montserrat'"href="{% url 'home' %}">Home</a></li>
+										<li><a style="font-family: 'Montserrat'" href="{% url 'about' %}">About us</a></li>
 									</ul>
 								</nav>
 							</div>
@@ -47,11 +45,17 @@
 						<div class="header_links">
 							<ul class="d-flex flex-row align-items-center justify-content-start">
 								{% if request.user.is_authenticated %}
-									<li><a href="{% url 'profile' %}">My Profile</a></li>
-									<li><a href="{% url 'logout' %}">Logout</a></li>
+									{% if user.is_superuser %}
+										<li><a style="font-family: 'Montserrat'" href="{% url 'profile' %}">Hello Admin, {{ user.username }}</a></li>
+										<li><a style="font-family: 'Montserrat'" href="{% url 'admin:index' %}">Admin Site</a></li>
+										<li><a style="font-family: 'Montserrat'" href="{% url 'logout' %}">Logout</a></li>
+									{% else %}
+										<li><a style="font-family: 'Montserrat'" href="{% url 'profile' %}">Hello User, {{ user.username }}</a></li>
+										<li><a style="font-family: 'Montserrat'" href="{% url 'logout' %}">Logout</a></li>
+									{% endif %}
 								{% else %}
-									<li><a href="{% url 'login' %}">Login</a></li>
-									<li><a href="{% url 'register' %}">Register</a></li>
+									<li><a style="font-family: 'Montserrat'" href="{% url 'login' %}">Login</a></li>
+									<li><a style="font-family: 'Montserrat'" href="{% url 'register' %}">Register</a></li>
 								{% endif %}
 								
 							</ul>
@@ -94,11 +98,7 @@
 						<div class="footer_title">Our Services</div>
 						<div class="footer_list">
 							<ul>
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">Logo Design</a></li>
-								<li><a href="#">Domains Register</a></li>
-								<li><a href="#">Search Advertising</a></li>
-								<li><a href="#">Email Marketing</a></li>
+								
 							</ul>
 						</div>
 					</div>

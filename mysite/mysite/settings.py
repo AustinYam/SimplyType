@@ -159,3 +159,5 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'rguodRVruZa8qfhch7V77ruD' #Paste Secret Key
 
 SOCIAL_AUTH_GITHUB_KEY = '66f785b04e0ab2b40deb' #Paste Client ID
 SOCIAL_AUTH_GITHUB_SECRET = '8f0d34f05239f1cfe05a5b8b0390326e2fe57e2a' #Paste Secret Key
+
+SESSION_COOKIE_AGE = 3600 # on hour in seconds
